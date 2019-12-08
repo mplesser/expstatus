@@ -1,0 +1,14 @@
+*.wpu
+*.log
+
+__pycache__/
+*.egg-info/
+
+docs/_build/
+
+.ipynb_checkpoints
+
+.venv
+.venvs
+
+.mypy_cache/
