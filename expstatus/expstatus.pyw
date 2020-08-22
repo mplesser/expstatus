@@ -103,10 +103,19 @@ class ExposureStatus(QMainWindow):
 # execute when run directly
 if __name__ == "__main__":
 
+    # ****************************************************************
+    # parse command line arguments
+    # ****************************************************************
+    try:
+        i = sys.argv.index("-port")
+        port = int(sys.argv[i + 1])
+    except ValueError:
+        port = 2402
+
     qtapp = QApplication(sys.argv)
     azcam.db.qtapp = qtapp
 
-    connected = azcam.console.api.connect()  # default host and port
+    connected = azcam.console.api.connect(port=port)  # default host and port
     if connected:
         print("Connected to azcamserver")
     else:
