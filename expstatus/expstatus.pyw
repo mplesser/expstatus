@@ -3,6 +3,7 @@
 # Qt4 version
 
 import sys
+import time
 
 from PySide2 import QtCore, QtGui
 from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
@@ -10,7 +11,6 @@ from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
 import azcam
 import azcam.console
 from azcam.sockets import SocketInterface
-import azcam.console
 from expstatus_ui import Ui_ExposureStatus
 
 
@@ -51,7 +51,7 @@ class ExposureStatus(QMainWindow):
         """
 
         # set status text
-        status = azcam.api.get_par("exposureflag")
+        status = azcam.console.api.get_par("exposureflag")
 
         for key in self.flags:
             if self.flags[key] == status:
@@ -112,14 +112,21 @@ if __name__ == "__main__":
     except ValueError:
         port = 2402
 
-    qtapp = QApplication(sys.argv)
-    azcam.db.qtapp = qtapp
+    # ****************************************************************
+    # create Qt app
+    # ****************************************************************
+    if azcam.db.get("atapp") is None:
+        qtapp = QtCore.QCoreApplication.instance()
+        if qtapp is None:
+            qtapp = QApplication(sys.argv)
+        azcam.db.qtapp = qtapp
 
     connected = azcam.console.api.connect(port=port)  # default host and port
     if connected:
         print("Connected to azcamserver")
     else:
         print("Not connected to azcamserver")
+        time.sleep(2)
         raise azcam.AzcamError("Could not connect to AzCamSever")
 
     gui = ExposureStatus()
