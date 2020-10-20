@@ -1,10 +1,5 @@
 from setuptools import setup, find_packages
 
-requirements = [
-    "azcam",
-]
-
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
@@ -18,5 +13,5 @@ setup(
     keywords="ccd imaging astronomy observation observatory",
     packages=find_packages(),
     zip_safe=False,
-    install_requires=requirements,
+    install_requires=["azcam", "PySide2"],
 )
