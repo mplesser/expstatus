@@ -51,7 +51,7 @@ class ExposureStatus(QMainWindow):
         """
 
         # set status text
-        status = azcam.console.api.get_par("exposureflag")
+        status = azcam.api.exposure.get_par("exposureflag")
 
         for key in self.flags:
             if self.flags[key] == status:
@@ -121,7 +121,7 @@ if __name__ == "__main__":
             qtapp = QApplication(sys.argv)
         azcam.db.qtapp = qtapp
 
-    connected = azcam.console.api.connect(port=port)  # default host and port
+    connected = azcam.api.serverconn.connect(port=port)  # default host and port
     if connected:
         print("Connected to azcamserver")
     else:
