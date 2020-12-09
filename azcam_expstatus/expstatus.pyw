@@ -1,17 +1,12 @@
-# GUI for exposurestatus process
-
-# Qt4 version
-
 import sys
 import time
 
-from PySide2 import QtCore, QtGui
-from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
+from PySide2 import QtCore
+from PySide2.QtWidgets import QMainWindow, QApplication
 
 import azcam
 import azcam.console
-from azcam.sockets import SocketInterface
-from expstatus_ui import Ui_ExposureStatus
+from .expstatus_ui import Ui_ExposureStatus
 
 
 class ExposureStatus(QMainWindow):
@@ -33,7 +28,9 @@ class ExposureStatus(QMainWindow):
         self.timerID = self.ctimer = QtCore.QTimer()
 
         # connect timer
-        QtCore.QObject.connect(self.ctimer, QtCore.SIGNAL("timeout()"), self.timer_update)
+        QtCore.QObject.connect(
+            self.ctimer, QtCore.SIGNAL("timeout()"), self.timer_update
+        )
 
         # start timer
         self.ctimer.start(self.update_interval)
@@ -66,18 +63,24 @@ class ExposureStatus(QMainWindow):
                     self.ui.label_status.setText(key)
                     # set indicator colors
                     if key == "EXPOSING":
-                        self.ui.label_integrating.setStyleSheet("background-color: green;")
+                        self.ui.label_integrating.setStyleSheet(
+                            "background-color: green;"
+                        )
                         self.ui.label_reading.setStyleSheet("background-color: none;")
                         self.ui.label_integrating.setText("Exposing")
                         self.ui.label_reading.setText("")
                     elif key == "READOUT":
                         self.ui.label_reading.setStyleSheet("background-color: red;")
-                        self.ui.label_integrating.setStyleSheet("background-color: none;")
+                        self.ui.label_integrating.setStyleSheet(
+                            "background-color: none;"
+                        )
                         self.ui.label_reading.setText("Reading")
                         self.ui.label_integrating.setText("")
                     else:
                         self.ui.label_reading.setStyleSheet("background-color: none;")
-                        self.ui.label_integrating.setStyleSheet("background-color: none;")
+                        self.ui.label_integrating.setStyleSheet(
+                            "background-color: none;"
+                        )
                         self.ui.label_integrating.setText("")
                         self.ui.label_reading.setText("")
 
