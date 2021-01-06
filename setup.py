@@ -8,6 +8,7 @@ setup(
     version="20.1",
     description="azcam extension for displaying exposure progress in Qt window",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Michael Lesser",
     author_email="mlesser@arizona.edu",
     keywords="ccd imaging astronomy observation observatory",
