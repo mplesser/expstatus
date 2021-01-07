@@ -4,8 +4,8 @@
 
 ## Installation
 
-Download from github: https://github.com/mplesser/azcam-expstatus.git.
+`pip install azam-expstatus`
 
-## Startup and configuration
+Or download from github: https://github.com/mplesser/azcam-expstatus.git.
 
 
