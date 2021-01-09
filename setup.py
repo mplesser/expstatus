@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="azcam-expstatus",
-    version="21.1.1",
+    version="21.1.2",
     description="azcam extension for displaying exposure progress in Qt window",
     long_description=long_description,
     long_description_content_type="text/markdown",
